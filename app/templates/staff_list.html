@@ -1,0 +1,40 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<h2>Staff</h2>
+<form method="get" class="mb-3">
+  <input type="text" name="q" value="{{ q }}" placeholder="Search staff..." class="form-control" style="max-width:300px; display:inline-block;">
+  <input type="hidden" name="sort" value="{{ sort }}">
+  <input type="hidden" name="dir" value="{{ dir }}">
+  <button class="btn btn-primary">Search</button>
+</form>
+
+<table class="table table-striped">
+  
+<thead>
+  <tr>
+    <th><a href="/staff?sort=id&dir={{ 'desc' if sort=='id' and dir=='asc' else 'asc' }}&q={{ q }}">ID{% if sort=='id' %} {{ '▲' if dir=='asc' else '▼' }}{% endif %}</a></th>
+    <th><a href="/staff?sort=name&dir={{ 'desc' if sort=='name' and dir=='asc' else 'asc' }}&q={{ q }}">Name{% if sort=='name' %} {{ '▲' if dir=='asc' else '▼' }}{% endif %}</a></th>
+    <th><a href="/staff?sort=email&dir={{ 'desc' if sort=='email' and dir=='asc' else 'asc' }}&q={{ q }}">Email{% if sort=='email' %} {{ '▲' if dir=='asc' else '▼' }}{% endif %}</a></th>
+    <th>Actions</th>
+  </tr>
+</thead>
+
+  <tbody>
+    {% for s in staff %}
+    <tr>
+      <td>{{ s.staff_id }}</td>
+      <td>{{ s.name }}</td>
+      <td>{{ s.email or '' }}</td>
+      <td>
+        <form method="post" action="/staff/{{ s.staff_id }}/delete" style="display:inline">
+          <a class="btn btn-sm btn-outline-primary" href="/staff/{{ s.staff_id }}/edit">Edit</a>
+          <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this staff?')">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+

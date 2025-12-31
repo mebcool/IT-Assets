@@ -1,0 +1,36 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="row g-3">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Staff</h5>
+        <p class="card-text">Add and manage staff records.</p>
+        <a class="btn btn-primary" href="/staff/new">Add Staff</a>
+        <a class="btn btn-outline-secondary" href="/staff">View Staff</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Computers</h5>
+        <p class="card-text">Track computers assigned to staff.</p>
+        <a class="btn btn-primary" href="/computers/new">Add Computer</a>
+        <a class="btn btn-outline-secondary" href="/computers">View Computers</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Special Software</h5>
+        <p class="card-text">Record licensed / special software on each computer.</p>
+        <a class="btn btn-primary" href="/software/new">Add Software</a>
+        <a class="btn btn-outline-secondary" href="/software">View Software</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<h2>Add Computer</h2>
+<form method="post" action="/computers/new">
+  <div class="mb-3">
+    <label class="form-label">Assigned Staff</label>
+    <select class="form-select" name="staff_id" required>
+      {% for s in staff %}
+        <option value="{{ s.staff_id }}">{{ s.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Comp Name</label>
+    <input class="form-control" name="comp_name" required />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Computer Model</label>
+    <input class="form-control" name="computer_model" required />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Service Tag</label>
+    <input class="form-control" name="service_tag" required />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Warranty End (YYYY-MM-DD)</label>
+    <input class="form-control" name="warranty_end" />
+  </div>
+
+<div class="form-check mb-3">
+  <input class="form-check-input" type="checkbox" id="is_manager" name="is_manager" value="1">
+  <label class="form-check-label" for="is_manager">Manager (Yes/No)</label>
+</div>
+
+<div class="mb-3">
+  <label class="form-label">Ticket number</label>
+  <input class="form-control" name="ticket_number" />
+</div>
+
+  <button class="btn btn-success">Save</button>
+  <a class="btn btn-secondary" href="/computers">Cancel</a>
+</form>
+{% endblock %}

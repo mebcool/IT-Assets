@@ -1,0 +1,42 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<h2>Edit Computer</h2>
+<form method="post" action="/computers/{{ computer.computer_id }}/edit">
+  <div class="mb-3">
+    <label class="form-label">Assigned Staff</label>
+    <select class="form-select" name="staff_id">
+      {% for s in staff %}
+        <option value="{{ s.staff_id }}" {% if s.staff_id == computer.staff_id %}selected{% endif %}>{{ s.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Comp Name</label>
+    <input class="form-control" name="comp_name" value="{{ computer.comp_name }}" />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Computer Model</label>
+    <input class="form-control" name="computer_model" value="{{ computer.computer_model }}" />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Service Tag</label>
+    <input class="form-control" name="service_tag" value="{{ computer.service_tag }}" />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Warranty End (YYYY-MM-DD)</label>
+    <input class="form-control" name="warranty_end" value="{{ computer.warranty_end or '' }}" />
+  </div>
+  <div class="form-check mb-3">
+    <input class="form-check-input" type="checkbox" id="is_manager" name="is_manager" value="1" {% if computer.is_manager %}checked{% endif %}>
+    <label class="form-check-label" for="is_manager">Manager (Yes/No)</label>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Ticket number</label>
+    <input class="form-control" name="ticket_number" value="{{ computer.ticket_number or '' }}" />
+  </div>
+  <button class="btn btn-success">Update</button>
+  <a class="btn btn-secondary" href="/computers">Cancel</a>
+</form>
+{% endblock %}
+

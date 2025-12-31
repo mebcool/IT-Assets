@@ -1,0 +1,22 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<h2>Edit Software</h2>
+<form method="post" action="/software/{{ software.software_id }}/edit">
+  <div class="mb-3">
+    <label class="form-label">Computer</label>
+    <select class="form-select" name="computer_id">
+      {% for c in computers %}
+        <option value="{{ c.computer_id }}" {% if c.computer_id == software.computer_id %}selected{% endif %}>{{ c.comp_name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Software Name</label>
+    <input class="form-control" name="software_name" value="{{ software.software_name }}" />
+  </div>
+  <button class="btn btn-success">Update</button>
+  <a class="btn btn-secondary" href="/software">Cancel</a>
+</form>
+{% endblock %}
+``

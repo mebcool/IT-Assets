@@ -1,0 +1,45 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<h2>Import / Export</h2>
+
+<div class="row">
+  <!-- Import Section -->
+  <div class="col-md-6">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Import CSV</h5>
+        <p class="text-muted">
+          Expected columns: <code>Fac/Staff Name</code>, <code>Comp Name</code>, <code>Type</code>, <code>ST</code>,
+          <code>Warranty End</code>, <code>Manager's account</code>, plus one or more <code>Special software</code> columns.
+        </p>
+        <form method="post" action="/import" enctype="multipart/form-data">
+          <div class="mb-3">
+            <input type="file" name="file" accept=".csv,.txt" class="form-control" required />
+          </div>
+          
+<div class="form-check mb-3">
+  <input class="form-check-input" type="checkbox" id="overwrite" name="overwrite" value="1">
+  <label class="form-check-label" for="overwrite">Overwrite software list per computer (instead of appending).</label>
+</div>
+
+          <button class="btn btn-success">Upload & Import</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Export Section -->
+  <div class="col-md-6">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Export CSV</h5>
+        <p class="text-muted">
+          Exports computers with up to 6 <code>Special software</code> columns (or more if needed).
+        </p>
+        <a class="btn btn-primary" href="/export/computers.csv" download>Download Computers CSV</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

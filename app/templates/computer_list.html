@@ -1,0 +1,51 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<h2>Computers</h2>
+
+<form method="get" class="mb-3">
+  <input type="text" name="q" value="{{ q }}" placeholder="Search computers..." class="form-control" style="max-width:300px; display:inline-block;">
+  <input type="hidden" name="sort" value="{{ sort }}">
+  <input type="hidden" name="dir" value="{{ dir }}">
+  <button class="btn btn-primary">Search</button>
+</form>
+
+<a class="btn btn-primary mb-3" href="/computers/new">Add Computer</a>
+
+<table class="table table-striped">
+<thead>
+  <tr>
+    <th><a href="/computers?sort=id&dir={{ 'desc' if sort=='id' and dir=='asc' else 'asc' }}&q={{ q }}">ID{% if sort=='id' %} {{ '▲' if dir=='asc' else '▼' }}{% endif %}</a></th>
+    <th><a href="/computers?sort=comp_name&dir={{ 'desc' if sort=='comp_name' and dir=='asc' else 'asc' }}&q={{ q }}">Comp Name{% if sort=='comp_name' %} {{ '▲' if dir=='asc' else '▼' }}{% endif %}</a></th>
+    <th><a href="/computers?sort=model&dir={{ 'desc' if sort=='model' and dir=='asc' else 'asc' }}&q={{ q }}">Model{% if sort=='model' %} {{ '▲' if dir=='asc' else '▼' }}{% endif %}</a></th>
+    <th><a href="/computers?sort=service_tag&dir={{ 'desc' if sort=='service_tag' and dir=='asc' else 'asc' }}&q={{ q }}">Service Tag{% if sort=='service_tag' %} {{ '▲' if dir=='asc' else '▼' }}{% endif %}</a></th>
+    <th><a href="/computers?sort=owner&dir={{ 'desc' if sort=='owner' and dir=='asc' else 'asc' }}&q={{ q }}">Owner{% if sort=='owner' %} {{ '▲' if dir=='asc' else '▼' }}{% endif %}</a></th>
+    <th><a href="/computers?sort=is_manager&dir={{ 'desc' if sort=='is_manager' and dir=='asc' else 'asc' }}&q={{ q }}">Manager{% if sort=='is_manager' %} {{ '▲' if dir=='asc' else '▼' }}{% endif %}</a></th>
+    <th><a href="/computers?sort=warranty_end&dir={{ 'desc' if sort=='warranty_end' and dir=='asc' else 'asc' }}&q={{ q }}">Warranty End{% if sort=='warranty_end' %} {{ '▲' if dir=='asc' else '▼' }}{% endif %}</a></th>
+    <th><a href="/computers?sort=ticket_number&dir={{ 'desc' if sort=='ticket_number' and dir=='asc' else 'asc' }}&q={{ q }}">Ticket{% if sort=='ticket_number' %} {{ '▲' if dir=='asc' else '▼' }}{% endif %}</a></th>
+    <th>Actions</th>
+  </tr>
+</thead>
+
+<tbody>
+{% for c in computers %}
+  <tr>
+    <td>{{ c.computer_id }}</td>
+    <td>{{ c.comp_name }}</td>
+    <td>{{ c.computer_model }}</td>
+    <td>{{ c.service_tag }}</td>
+    <td>{{ c.owner.name }}</td>
+    <td>{{ 'Yes' if c.is_manager else 'No' }}</td>
+    <td>{{ c.warranty_end or '' }}</td>
+    <td>{{ c.ticket_number or '' }}</td>
+    <td>
+      <a class="btn btn-sm btn-outline-primary" href="/computers/{{ c.computer_id }}/edit">Edit</a>
+      <form method="post" action="/computers/{{ c.computer_id }}/delete" style="display:inline">
+        <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this computer?')">Delete</button>
+      </form>
+    </td>
+  </tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}
