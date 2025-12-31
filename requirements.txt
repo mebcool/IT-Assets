@@ -8,4 +8,5 @@ python-multipart==0.0.9
 email-validator==2.2.0
 pip install gunicorn
 pip freeze > requirements.txt
-
+python-multipart
+psycopg2-binary
